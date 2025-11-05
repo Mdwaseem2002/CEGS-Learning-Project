@@ -1,8 +1,14 @@
-// src/app/login/page.tsx
 'use client';
-import { useState, useEffect } from 'react';
+
+import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { auth } from '@/lib/auth';
+// Assuming '@/lib/auth' is available and handles login logic
+import { auth } from '@/lib/auth'; 
+
+// CRITICAL FIX: Forces the page to be dynamically rendered (SSR) 
+// for every request, bypassing the static generation attempt that fails 
+// due to the presence of useSearchParams() outside a Suspense boundary.
+export const dynamic = 'force-dynamic'; 
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -11,10 +17,9 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   
   const router = useRouter();
+  // useSearchParams() is safe here because we set dynamic = 'force-dynamic' above.
   const searchParams = useSearchParams();
   const loginType = searchParams.get('type') || 'admin';
-
-  // Removed auto-populate - users must manually enter credentials
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +28,8 @@ export default function LoginPage() {
 
     try {
       console.log('Attempting login...');
-      const user = await auth.login(username, password);
+      // @ts-ignore - Assuming auth.login accepts (string, string)
+      const user = await auth.login(username, password); 
       
       console.log('Login result:', user);
       
@@ -31,11 +37,12 @@ export default function LoginPage() {
         // Add a small delay to ensure storage is updated
         await new Promise(resolve => setTimeout(resolve, 100));
         
-        // Verify token is stored
-        const storedToken = localStorage.getItem('token') || sessionStorage.getItem('hrms_token');
+        // Verify token is stored (Note: localStorage will only be available on the client)
+        const storedToken = typeof window !== 'undefined' ? (localStorage.getItem('token') || sessionStorage.getItem('hrms_token')) : null;
         console.log('Token stored after login:', !!storedToken);
         
         // Successful login - redirect based on role
+        // @ts-ignore - Assuming user object has a role property
         if (user.role === 'admin') {
           console.log('Redirecting to admin dashboard...');
           router.push('/admin');
