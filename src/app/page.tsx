@@ -24,16 +24,16 @@ export default function HomePage() {
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <div className="w-12 h-12 bg-gradient-to-tr from-yellow-400 via-amber-500 to-yellow-600 rounded-full flex items-center justify-center shadow-xl ring-2 ring-yellow-400/30">
-                  <span className="text-black text-lg font-bold tracking-wider">C</span>
+                  <span className="text-black text-lg font-bold tracking-wider">L</span>
                 </div>
                 <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400/50 to-amber-500/50 rounded-full blur-md opacity-60 animate-pulse" />
               </div>
               <div>
                 <h1 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 tracking-tight">
-                  CEGS
+                  Academic Portal
                 </h1>
                 <p className="text-yellow-400/80 text-sm font-medium">
-                  Career Expert Global solutions
+                  Leading Knowledge Management Platform
                 </p>
               </div>
             </div>
@@ -46,7 +46,7 @@ export default function HomePage() {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center gap-2">
-                  👑 Admin Portal
+                  🎓 Faculty Login
                 </span>
               </a>
 
@@ -56,7 +56,7 @@ export default function HomePage() {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center gap-2">
-                  💼 User Access
+                  📖 Student Access
                 </span>
               </a>
             </div>
@@ -72,29 +72,29 @@ export default function HomePage() {
           <div className="space-y-8">
             <div className="text-left">
               <h2 className="text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 mb-6 tracking-tight leading-tight">
-                Elevate Your Workforce
+                Master Your Future
               </h2>
               <p className="text-xl text-gray-300 leading-relaxed mb-8 max-w-lg">
-                Transform your business with innovative technology and strategic human resource solutions designed for the modern enterprise.
+                Unlock your potential with our world-class Learning Management System. Comprehensive courses designed for modern excellence.
               </p>
             </div>
 
             {/* Feature Highlights */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="bg-gradient-to-br from-yellow-400/10 to-amber-500/10 p-6 rounded-xl border border-yellow-400/20 text-center group hover:scale-105 transition-transform duration-300">
-                <div className="text-3xl mb-3">🏢</div>
-                <h3 className="text-yellow-400 font-semibold mb-2">Enterprise Ready</h3>
-                <p className="text-gray-400 text-sm">Scalable solutions for businesses of all sizes</p>
+                <div className="text-3xl mb-3">📚</div>
+                <h3 className="text-yellow-400 font-semibold mb-2">Expert Courses</h3>
+                <p className="text-gray-400 text-sm">Curated content from industry leaders</p>
               </div>
               <div className="bg-gradient-to-br from-yellow-400/10 to-amber-500/10 p-6 rounded-xl border border-yellow-400/20 text-center group hover:scale-105 transition-transform duration-300">
-                <div className="text-3xl mb-3">⚡</div>
-                <h3 className="text-yellow-400 font-semibold mb-2">Advanced Analytics</h3>
-                <p className="text-gray-400 text-sm">Data-driven insights for strategic decisions</p>
+                <div className="text-3xl mb-3">📈</div>
+                <h3 className="text-yellow-400 font-semibold mb-2">Track Progress</h3>
+                <p className="text-gray-400 text-sm">Visual analytics of your learning journey</p>
               </div>
               <div className="bg-gradient-to-br from-yellow-400/10 to-amber-500/10 p-6 rounded-xl border border-yellow-400/20 text-center group hover:scale-105 transition-transform duration-300">
-                <div className="text-3xl mb-3">🛡️</div>
-                <h3 className="text-yellow-400 font-semibold mb-2">Secure & Compliant</h3>
-                <p className="text-gray-400 text-sm">Bank-level security with full compliance</p>
+                <div className="text-3xl mb-3">🏅</div>
+                <h3 className="text-yellow-400 font-semibold mb-2">Certification</h3>
+                <p className="text-gray-400 text-sm">Earn recognized credentials upon completion</p>
               </div>
             </div>
 
@@ -102,11 +102,11 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4">
               <button className="group bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 hover:from-yellow-300 hover:via-amber-400 hover:to-yellow-500 text-black text-lg font-bold py-4 px-8 rounded-xl shadow-2xl hover:shadow-yellow-400/25 transition-all duration-300 ease-in-out transform hover:scale-105 hover:-translate-y-1 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="relative z-10">Get Started Today</span>
+                <span className="relative z-10">Start Learning</span>
               </button>
               <button className="group text-yellow-400 border-2 border-yellow-400/50 hover:border-yellow-400 text-lg font-semibold py-4 px-8 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105 hover:-translate-y-1 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="relative z-10">Learn More</span>
+                <span className="relative z-10">Browse Catalog</span>
               </button>
             </div>
           </div>
@@ -127,13 +127,13 @@ export default function HomePage() {
                       <span className="text-yellow-400 font-semibold">Administrator Access:</span>
                     </p>
                     <p className="text-white font-mono text-sm">
-                      Email: admin@cegs.com<br />
+                      Email: admin@academy.com<br />
                       Password: admin123
                     </p>
                   </div>
                   <div className="bg-gradient-to-r from-gray-700/20 to-gray-800/20 p-4 rounded-xl border border-gray-600/20">
                     <p className="text-gray-400 text-sm">
-                      Employee credentials are distributed by system administrators through the platform.
+                      Student enrollments are managed by faculty through the platform.
                     </p>
                   </div>
                 </div>
@@ -146,24 +146,24 @@ export default function HomePage() {
               <div className="relative z-10">
                 <h3 className="text-yellow-400 font-bold text-xl mb-4 flex items-center gap-3">
                   <span className="text-2xl">📊</span>
-                  Platform Insights
+                  Learning Metrics
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-white">500+</div>
-                    <div className="text-gray-400 text-sm">Active Companies</div>
+                    <div className="text-2xl font-bold text-white">100+</div>
+                    <div className="text-gray-400 text-sm">Available Courses</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-white">50K+</div>
-                    <div className="text-gray-400 text-sm">Employees Managed</div>
+                    <div className="text-2xl font-bold text-white">10K+</div>
+                    <div className="text-gray-400 text-sm">Active Students</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-white">99.9%</div>
-                    <div className="text-gray-400 text-sm">Uptime</div>
+                    <div className="text-gray-400 text-sm">Platform Uptime</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-white">24/7</div>
-                    <div className="text-gray-400 text-sm">Support</div>
+                    <div className="text-gray-400 text-sm">Instructor Support</div>
                   </div>
                 </div>
               </div>
@@ -177,10 +177,10 @@ export default function HomePage() {
         <div className="container mx-auto px-6 py-6">
           <div className="text-center">
             <p className="text-gray-500 text-sm">
-              © 2025 CEGS - Career Expert Global solutions
+              © 2026 Academic Portal - Knowledge Management System
             </p>
             <p className="text-yellow-400/60 text-xs mt-1">
-              Transforming businesses through intelligent workforce management
+              Empowering education through intelligent digital solutions
             </p>
           </div>
         </div>

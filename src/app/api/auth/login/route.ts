@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     const { username, password } = await request.json();
 
     // Check admin credentials
-    if (username === 'usman@cegs.com' && password === '0786') {
+    if (username === 'admin@academy.com' && password === '0786') {
       const token = jwt.sign(
         { id: 'admin', username, role: 'admin' },
         JWT_SECRET,
@@ -47,26 +47,26 @@ export async function POST(request: NextRequest) {
     }
 
     const token = jwt.sign(
-      { 
-        id: employee.id, 
-        username: employee.username, 
+      {
+        id: employee.id,
+        username: employee.username,
         role: 'employee',
-        name: employee.name 
+        name: employee.name
       },
       JWT_SECRET,
       { expiresIn: '24h' }
     );
 
     return NextResponse.json({
-  success: true,
-  token: token, // Make sure this is included!
-  user: {
-    id: employee.id,
-    name: employee.name,
-    email: employee.email,
-    role: employee.role,
-  },
-});
+      success: true,
+      token: token, // Make sure this is included!
+      user: {
+        id: employee.id,
+        name: employee.name,
+        email: employee.email,
+        role: employee.role,
+      },
+    });
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json(

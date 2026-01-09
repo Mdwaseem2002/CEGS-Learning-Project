@@ -46,7 +46,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       <nav className="relative z-20 bg-gradient-to-r from-gray-900/95 via-black/98 to-gray-900/95 backdrop-blur-xl border-b border-yellow-400/20 shadow-2xl">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            
+
             {/* Left Section - Logo & Navigation */}
             <div className="flex items-center space-x-6">
               {/* Logo */}
@@ -59,15 +59,15 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500">
-                    CEGS
+                    Academy
                   </h1>
-                  <p className="text-xs text-gray-400 -mt-1">Administrator Panel</p>
+                  <p className="text-xs text-gray-400 -mt-1">LMS Panel</p>
                 </div>
               </div>
 
               {/* Navigation Buttons */}
               <div className="flex items-center space-x-3 ml-8">
-                <button 
+                <button
                   onClick={handleBack}
                   className="group flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white rounded-lg border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 shadow-lg hover:shadow-yellow-400/10"
                 >
@@ -75,7 +75,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   <span className="text-sm font-medium">Back</span>
                 </button>
 
-                <button 
+                <button
                   onClick={goToHome}
                   className="group flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-yellow-400/10 to-amber-500/10 hover:from-yellow-400/20 hover:to-amber-500/20 text-yellow-400 rounded-lg border border-yellow-400/30 hover:border-yellow-400/50 transition-all duration-300 shadow-lg hover:shadow-yellow-400/10"
                 >
@@ -91,12 +91,12 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 <div className="text-right mr-4">
                   <p className="text-sm font-semibold text-white">{user.name}</p>
                   <p className="text-xs text-yellow-400">
-  {user?.role ? user.role.toUpperCase() : 'ROLE'}
-</p>
+                    {user?.role ? user.role.toUpperCase() : 'ROLE'}
+                  </p>
 
                 </div>
               )}
-              <button 
+              <button
                 onClick={handleLogout}
                 className="group flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white rounded-lg border border-red-400/30 hover:border-red-400/50 transition-all duration-300 shadow-lg hover:shadow-red-400/10"
               >
@@ -118,10 +118,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       {/* Footer */}
       <footer className="relative z-10 text-center py-6">
         <p className="text-gray-500 text-sm">
-          © 2025 CEGS - Career Expert Global solutions
+          © 2026 Academic Portal - Knowledge Management System
         </p>
         <p className="text-yellow-400/40 text-xs mt-1">
-          Advanced Human Resource Management System
+          Modern Learning Management System
         </p>
       </footer>
     </div>

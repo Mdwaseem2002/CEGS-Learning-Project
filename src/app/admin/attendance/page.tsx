@@ -9,17 +9,17 @@ import { AttendanceRecord } from '@/types';
 export default function AttendancePage() {
   const [attendance, setAttendance] = useState<AttendanceRecord[]>([]);
   const [filteredAttendance, setFilteredAttendance] = useState<AttendanceRecord[]>([]);
-  
+
   // Filter inputs (not applied until search is clicked)
   const [searchEmployee, setSearchEmployee] = useState('');
   const [searchDateFrom, setSearchDateFrom] = useState('');
   const [searchDateTo, setSearchDateTo] = useState('');
-  
+
   // Applied filters (used for actual filtering)
   const [appliedEmployee, setAppliedEmployee] = useState('');
   const [appliedDateFrom, setAppliedDateFrom] = useState('');
   const [appliedDateTo, setAppliedDateTo] = useState('');
-  
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const router = useRouter();
@@ -49,7 +49,7 @@ export default function AttendancePage() {
   useEffect(() => {
     const verifyAndLoadData = async () => {
       const isValidAdmin = await auth.requireAdminSession();
-      
+
       if (!isValidAdmin) {
         router.push('/login?type=admin');
         return;
@@ -69,7 +69,7 @@ export default function AttendancePage() {
     try {
       setLoading(true);
       const token = auth.getToken();
-      
+
       const response = await fetch('/api/attendance', {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -78,7 +78,7 @@ export default function AttendancePage() {
       });
 
       const data = await response.json();
-      
+
       if (data.success) {
         setAttendance(data.data);
       } else {
@@ -97,7 +97,7 @@ export default function AttendancePage() {
 
     // Filter by employee name
     if (appliedEmployee) {
-      filtered = filtered.filter(record => 
+      filtered = filtered.filter(record =>
         record.employeeName.toLowerCase().includes(appliedEmployee.toLowerCase())
       );
     }
@@ -146,12 +146,12 @@ export default function AttendancePage() {
     const button = event.currentTarget as HTMLElement;
     const rect = button.getBoundingClientRect();
     const modalWidth = 384;
-    
+
     const top = rect.top + window.scrollY + (rect.height / 2);
     const left = rect.left + window.scrollX - modalWidth / 2 + (rect.width / 2);
-    
+
     setModalPosition({ top, left });
-    
+
     setEditingRecord(record);
     setEditForm({
       loginTime: record.loginTime || '',
@@ -187,10 +187,10 @@ export default function AttendancePage() {
     const button = event.currentTarget as HTMLElement;
     const rect = button.getBoundingClientRect();
     const modalWidth = 672;
-    
+
     const top = rect.top + window.scrollY + (rect.height / 2);
     const left = rect.left + window.scrollX - modalWidth / 2 + (rect.width / 2);
-    
+
     setAddModalPosition({ top, left });
     openAddModal();
   };
@@ -259,8 +259,8 @@ export default function AttendancePage() {
         const data = await response.json();
 
         if (response.ok && data.success) {
-          setAttendance(prev => prev.map(record => 
-            record.id === editingRecord.id 
+          setAttendance(prev => prev.map(record =>
+            record.id === editingRecord.id
               ? { ...record, loginTime: editForm.loginTime, logoutTime: editForm.logoutTime, totalHours }
               : record
           ));
@@ -284,8 +284,8 @@ export default function AttendancePage() {
 
     try {
       const token = auth.getToken();
-      const totalHours = addForm.logoutTime 
-        ? calculateTotalHours(addForm.loginTime, addForm.logoutTime) 
+      const totalHours = addForm.logoutTime
+        ? calculateTotalHours(addForm.loginTime, addForm.logoutTime)
         : 0;
 
       const [hour, minute] = addForm.loginTime.split(':').map(Number);
@@ -420,7 +420,7 @@ export default function AttendancePage() {
                 </div>
               </div>
             </div>
-            
+
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={openAddModalAtPosition}
@@ -505,7 +505,7 @@ export default function AttendancePage() {
                   />
                 </div>
               </div>
-              
+
               {/* Search and Clear Buttons */}
               <div className="flex gap-3 mt-6">
                 <button
@@ -529,7 +529,7 @@ export default function AttendancePage() {
                   </span>
                 </button>
               </div>
-              
+
               {/* Active Filters Display */}
               {(appliedEmployee || appliedDateFrom || appliedDateTo) && (
                 <div className="mt-4 p-4 bg-gradient-to-r from-blue-900/20 to-blue-800/20 rounded-lg border border-blue-400/30">
@@ -553,7 +553,7 @@ export default function AttendancePage() {
                   </div>
                 </div>
               )}
-              
+
               {/* Results Count */}
               <div className="mt-4 p-3 bg-gradient-to-r from-yellow-400/10 to-amber-500/10 rounded-lg border border-yellow-400/20">
                 <p className="text-yellow-400 text-sm font-semibold">
@@ -611,11 +611,10 @@ export default function AttendancePage() {
                       filteredAttendance.map((record, index) => {
                         const isActuallyPresent = (record as any).isActuallyPresent !== false;
                         return (
-                          <tr 
-                            key={record.id} 
-                            className={`hover:bg-gradient-to-r hover:from-yellow-400/5 hover:to-amber-500/5 transition-all duration-300 ${
-                              index % 2 === 0 ? 'bg-gray-800/20' : 'bg-gray-900/20'
-                            } ${!isActuallyPresent ? 'opacity-60' : ''}`}
+                          <tr
+                            key={record.id}
+                            className={`hover:bg-gradient-to-r hover:from-yellow-400/5 hover:to-amber-500/5 transition-all duration-300 ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-gray-900/20'
+                              } ${!isActuallyPresent ? 'opacity-60' : ''}`}
                           >
                             <td className="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap">
                               <div className="flex items-center">
@@ -651,11 +650,10 @@ export default function AttendancePage() {
                             </td>
                             <td className="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap">
                               <div className="flex flex-col gap-1">
-                                <span className={`inline-flex items-center px-2 md:px-3 py-1 rounded-full text-xs font-bold ${
-                                  record.isLate 
-                                    ? 'bg-gradient-to-r from-red-500/20 to-red-600/20 text-red-400 border border-red-400/30' 
+                                <span className={`inline-flex items-center px-2 md:px-3 py-1 rounded-full text-xs font-bold ${record.isLate
+                                    ? 'bg-gradient-to-r from-red-500/20 to-red-600/20 text-red-400 border border-red-400/30'
                                     : 'bg-gradient-to-r from-green-500/20 to-green-600/20 text-green-400 border border-green-400/30'
-                                }`}>
+                                  }`}>
                                   {record.isLate ? '⚠️ Late' : '✅ On Time'}
                                 </span>
                                 {!isActuallyPresent && (
@@ -703,7 +701,7 @@ export default function AttendancePage() {
                   </p>
                 </div>
               </div>
-              
+
               <div className="bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90 backdrop-blur-xl p-6 rounded-2xl shadow-2xl border border-red-400/20 relative overflow-hidden">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-red-400/5 to-red-500/5 blur-xl opacity-60" />
                 <div className="relative z-10 text-center">
@@ -714,7 +712,7 @@ export default function AttendancePage() {
                   </p>
                 </div>
               </div>
-              
+
               <div className="bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90 backdrop-blur-xl p-6 rounded-2xl shadow-2xl border border-orange-400/20 relative overflow-hidden">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-orange-400/5 to-orange-500/5 blur-xl opacity-60" />
                 <div className="relative z-10 text-center">
@@ -725,7 +723,7 @@ export default function AttendancePage() {
                   </p>
                 </div>
               </div>
-              
+
               <div className="bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90 backdrop-blur-xl p-6 rounded-2xl shadow-2xl border border-yellow-400/20 relative overflow-hidden">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-400/5 to-amber-500/5 blur-xl opacity-60" />
                 <div className="relative z-10 text-center">
@@ -742,21 +740,21 @@ export default function AttendancePage() {
           {/* Footer */}
           <div className="text-center mt-8">
             <p className="text-gray-500 text-sm">
-              © 2025 CEGS - Corporate Enterprise Growth Solutions
+              © 2026 Academic Portal - Knowledge Management System
             </p>
             <p className="text-yellow-400/60 text-xs mt-1">
-              Attendance Management System - Real-time Workforce Analytics
+              Attendance & Performance Analytics
             </p>
           </div>
         </div>
 
         {/* Edit Modal */}
         {isEditModalOpen && editingRecord && (
-          <div 
+          <div
             className="fixed inset-0 z-50"
             onClick={closeEditModal}
           >
-            <div 
+            <div
               className="absolute bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-xl shadow-2xl border-2 border-yellow-400/50 w-[90vw] max-w-md"
               style={{
                 top: `${modalPosition.top}px`,
@@ -794,7 +792,7 @@ export default function AttendancePage() {
                     <input
                       type="time"
                       value={editForm.loginTime}
-                      onChange={(e) => setEditForm({...editForm, loginTime: e.target.value})}
+                      onChange={(e) => setEditForm({ ...editForm, loginTime: e.target.value })}
                       className="w-full px-3 py-2 bg-gray-800/50 border border-yellow-400/30 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400/50"
                     />
                   </div>
@@ -806,7 +804,7 @@ export default function AttendancePage() {
                     <input
                       type="time"
                       value={editForm.logoutTime}
-                      onChange={(e) => setEditForm({...editForm, logoutTime: e.target.value})}
+                      onChange={(e) => setEditForm({ ...editForm, logoutTime: e.target.value })}
                       className="w-full px-3 py-2 bg-gray-800/50 border border-yellow-400/30 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400/50"
                     />
                   </div>
@@ -825,7 +823,7 @@ export default function AttendancePage() {
                       <input
                         type="checkbox"
                         checked={editForm.markAsAbsent}
-                        onChange={(e) => setEditForm({...editForm, markAsAbsent: e.target.checked})}
+                        onChange={(e) => setEditForm({ ...editForm, markAsAbsent: e.target.checked })}
                         className="w-4 h-4 rounded border-red-400/30 text-red-500 focus:ring-red-400/50"
                       />
                       <span className="text-red-400 font-semibold text-sm">Mark as Absent</span>
@@ -845,11 +843,10 @@ export default function AttendancePage() {
                 <div className="flex gap-2 mt-4">
                   <button
                     onClick={handleSaveEdit}
-                    className={`flex-1 font-bold px-3 md:px-4 py-2 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 ${
-                      editForm.markAsAbsent
+                    className={`flex-1 font-bold px-3 md:px-4 py-2 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 ${editForm.markAsAbsent
                         ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white'
                         : 'bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-black'
-                    }`}
+                      }`}
                   >
                     {editForm.markAsAbsent ? '🗑️ Remove' : '💾 Save'}
                   </button>
@@ -867,11 +864,11 @@ export default function AttendancePage() {
 
         {/* Add Attendance Modal */}
         {isAddModalOpen && (
-          <div 
+          <div
             className="fixed inset-0 z-50"
             onClick={closeAddModal}
           >
-            <div 
+            <div
               className="absolute bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl shadow-2xl border-2 border-green-400/50 w-[90vw] max-w-2xl max-h-[90vh] overflow-y-auto"
               style={{
                 top: `${addModalPosition.top}px`,
@@ -902,7 +899,7 @@ export default function AttendancePage() {
                       <input
                         type="text"
                         value={addForm.employeeName}
-                        onChange={(e) => setAddForm({...addForm, employeeName: e.target.value})}
+                        onChange={(e) => setAddForm({ ...addForm, employeeName: e.target.value })}
                         className="w-full px-3 md:px-4 py-2 md:py-3 bg-gray-800/50 border border-green-400/30 rounded-lg md:rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-green-400/50"
                         placeholder="Enter employee name"
                       />
@@ -915,7 +912,7 @@ export default function AttendancePage() {
                       <input
                         type="text"
                         value={addForm.employeeId}
-                        onChange={(e) => setAddForm({...addForm, employeeId: e.target.value})}
+                        onChange={(e) => setAddForm({ ...addForm, employeeId: e.target.value })}
                         className="w-full px-3 md:px-4 py-2 md:py-3 bg-gray-800/50 border border-green-400/30 rounded-lg md:rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-green-400/50"
                         placeholder="Auto-generated if empty"
                       />
@@ -929,7 +926,7 @@ export default function AttendancePage() {
                     <input
                       type="date"
                       value={addForm.date}
-                      onChange={(e) => setAddForm({...addForm, date: e.target.value})}
+                      onChange={(e) => setAddForm({ ...addForm, date: e.target.value })}
                       className="w-full px-3 md:px-4 py-2 md:py-3 bg-gray-800/50 border border-green-400/30 rounded-lg md:rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-green-400/50"
                     />
                   </div>
@@ -942,7 +939,7 @@ export default function AttendancePage() {
                       <input
                         type="time"
                         value={addForm.loginTime}
-                        onChange={(e) => setAddForm({...addForm, loginTime: e.target.value})}
+                        onChange={(e) => setAddForm({ ...addForm, loginTime: e.target.value })}
                         className="w-full px-3 md:px-4 py-2 md:py-3 bg-gray-800/50 border border-green-400/30 rounded-lg md:rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-green-400/50"
                       />
                     </div>
@@ -954,7 +951,7 @@ export default function AttendancePage() {
                       <input
                         type="time"
                         value={addForm.logoutTime}
-                        onChange={(e) => setAddForm({...addForm, logoutTime: e.target.value})}
+                        onChange={(e) => setAddForm({ ...addForm, logoutTime: e.target.value })}
                         className="w-full px-3 md:px-4 py-2 md:py-3 bg-gray-800/50 border border-green-400/30 rounded-lg md:rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-green-400/50"
                       />
                     </div>
@@ -967,7 +964,7 @@ export default function AttendancePage() {
                     <input
                       type="text"
                       value={addForm.location}
-                      onChange={(e) => setAddForm({...addForm, location: e.target.value})}
+                      onChange={(e) => setAddForm({ ...addForm, location: e.target.value })}
                       className="w-full px-3 md:px-4 py-2 md:py-3 bg-gray-800/50 border border-green-400/30 rounded-lg md:rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-green-400/50"
                       placeholder="Office, Remote, etc."
                     />

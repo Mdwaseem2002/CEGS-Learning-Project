@@ -17,76 +17,76 @@ export default function AdminDashboard() {
 
   // Replace the useEffect in src/app/admin/page.tsx
 
-useEffect(() => {
-  const verifyAndLoadData = async () => {
-    // Verify admin session first
-    const isValidAdmin = await auth.requireAdminSession();
-    
-    if (!isValidAdmin) {
-      router.push('/login?type=admin');
-      return;
+  useEffect(() => {
+    const verifyAndLoadData = async () => {
+      // Verify admin session first
+      const isValidAdmin = await auth.requireAdminSession();
+
+      if (!isValidAdmin) {
+        router.push('/login?type=admin');
+        return;
+      }
+
+      // Initial load
+      await loadDashboardData();
+
+      // Auto-refresh every 30 seconds to show new check-ins
+      const interval = setInterval(() => {
+        loadDashboardData();
+      }, 30000);
+
+      setLoading(false);
+
+      return () => clearInterval(interval);
+    };
+
+    verifyAndLoadData();
+  }, [router]);
+
+  // Add this new function
+  const loadDashboardData = async () => {
+    try {
+      console.log('🔄 Loading admin dashboard data...');
+
+      const today = new Date().toISOString().split('T')[0];
+      console.log('Today\'s date:', today);
+
+      // Fetch attendance records from API
+      const attendance = await db.getAttendanceRecords();
+
+      console.log('Total attendance records fetched:', attendance.length);
+      console.log('Sample record:', attendance[0]);
+
+      // Filter today's records
+      const todayRecords = attendance.filter(record => {
+        const recordDate = record.date.split('T')[0]; // Handle ISO date format
+        return recordDate === today;
+      });
+
+      console.log('Today\'s attendance records:', todayRecords.length);
+      console.log('Today\'s records:', todayRecords);
+
+      setTodayLogins(todayRecords.length);
+
+      // Get unique locations
+      const locations = new Set(
+        todayRecords.map(record => record.location || 'Office')
+      );
+      setUniqueLocations(locations.size);
+
+      // Filter late employees (after 9:15 AM)
+      const lateRecords = todayRecords.filter(record => record.isLate);
+      setLateEmployees(lateRecords);
+
+      console.log('📊 Dashboard Stats:', {
+        todayLogins: todayRecords.length,
+        uniqueLocations: locations.size,
+        lateEmployees: lateRecords.length
+      });
+    } catch (error) {
+      console.error('❌ Error loading dashboard data:', error);
     }
-
-    // Initial load
-    await loadDashboardData();
-    
-    // Auto-refresh every 30 seconds to show new check-ins
-    const interval = setInterval(() => {
-      loadDashboardData();
-    }, 30000);
-
-    setLoading(false);
-
-    return () => clearInterval(interval);
   };
-
-  verifyAndLoadData();
-}, [router]);
-
-// Add this new function
-const loadDashboardData = async () => {
-  try {
-    console.log('🔄 Loading admin dashboard data...');
-    
-    const today = new Date().toISOString().split('T')[0];
-    console.log('Today\'s date:', today);
-    
-    // Fetch attendance records from API
-    const attendance = await db.getAttendanceRecords();
-    
-    console.log('Total attendance records fetched:', attendance.length);
-    console.log('Sample record:', attendance[0]);
-    
-    // Filter today's records
-    const todayRecords = attendance.filter(record => {
-      const recordDate = record.date.split('T')[0]; // Handle ISO date format
-      return recordDate === today;
-    });
-    
-    console.log('Today\'s attendance records:', todayRecords.length);
-    console.log('Today\'s records:', todayRecords);
-    
-    setTodayLogins(todayRecords.length);
-    
-    // Get unique locations
-    const locations = new Set(
-      todayRecords.map(record => record.location || 'Office')
-    );
-    setUniqueLocations(locations.size);
-    
-    // Filter late employees (after 9:15 AM)
-    const lateRecords = todayRecords.filter(record => record.isLate);
-    setLateEmployees(lateRecords);
-    
-    console.log('📊 Dashboard Stats:', {
-      todayLogins: todayRecords.length,
-      uniqueLocations: locations.size,
-      lateEmployees: lateRecords.length
-    });
-  } catch (error) {
-    console.error('❌ Error loading dashboard data:', error);
-  }
-};
 
   // Show loading state while verifying session
   if (loading) {
@@ -131,10 +131,10 @@ const loadDashboardData = async () => {
               </div>
             </div>
             <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 mb-2 tracking-tight">
-              Administrator Dashboard
+              LMS Management Dashboard
             </h1>
             <p className="text-gray-300 text-lg">
-              Command center for enterprise workforce management
+              Command center for academic knowledge management
             </p>
           </div>
 
@@ -153,7 +153,7 @@ const loadDashboardData = async () => {
                     <p className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500">{todayLogins}</p>
                   </div>
                 </div>
-                
+
                 <div className="bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90 backdrop-blur-xl p-6 rounded-2xl shadow-2xl border border-yellow-400/20 relative overflow-hidden group hover:scale-105 transition-all duration-300">
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-400/10 via-amber-500/10 to-yellow-400/10 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
                   <div className="relative z-10">
@@ -217,7 +217,7 @@ const loadDashboardData = async () => {
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-400/5 via-amber-500/5 to-yellow-400/5 blur-xl opacity-60" />
                 <div className="relative z-10">
                   <h3 className="text-xl font-semibold text-yellow-400 mb-6 text-center">Quick Access Portal</h3>
-                  
+
                   <div className="space-y-4">
                     <button
                       onClick={() => router.push('/admin/employees')}
@@ -281,15 +281,15 @@ const loadDashboardData = async () => {
             </div>
           </div>
 
-          
+
 
           {/* Footer */}
           <div className="mt-8 text-center">
             <p className="text-gray-500 text-sm">
-              © 2025 CEGS - Career Expert Global solution
+              © 2026 Academic Portal - Knowledge Management System
             </p>
             <p className="text-yellow-400/60 text-xs mt-1">
-              Administrator Dashboard - Secure Access Portal
+              Faculty Dashboard - Secure Portal
             </p>
           </div>
         </div>

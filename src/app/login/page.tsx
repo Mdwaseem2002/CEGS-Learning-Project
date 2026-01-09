@@ -10,7 +10,7 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const loginType = searchParams.get('type') || 'admin';
@@ -23,17 +23,17 @@ function LoginForm() {
     try {
       console.log('Attempting login...');
       const user = await auth.login(username, password);
-      
+
       console.log('Login result:', user);
-      
+
       if (user) {
         // Add a small delay to ensure storage is updated
         await new Promise(resolve => setTimeout(resolve, 100));
-        
+
         // Verify token is stored
         const storedToken = localStorage.getItem('token') || sessionStorage.getItem('hrms_token');
         console.log('Token stored after login:', !!storedToken);
-        
+
         // Successful login - redirect based on role
         if (user.role === 'admin') {
           console.log('Redirecting to admin dashboard...');
@@ -71,7 +71,7 @@ function LoginForm() {
       {/* Login Card */}
       <div className="relative z-10 bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-yellow-400/20 max-w-md w-full mx-4">
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-400/5 via-amber-500/5 to-yellow-400/5 blur-xl opacity-60" />
-        
+
         <div className="relative z-10">
           {/* Header */}
           <div className="text-center mb-8">
@@ -86,7 +86,7 @@ function LoginForm() {
               </div>
             </div>
             <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 tracking-tight mb-2">
-              {loginType === 'admin' ? 'Admin Login' : 'Employee Login'}
+              {loginType === 'admin' ? 'Faculty Login' : 'Student Login'}
             </h2>
             <p className="text-gray-400 text-sm">
               Enter your credentials to access the system
@@ -100,8 +100,8 @@ function LoginForm() {
               <div className="text-sm">
                 <p className="text-blue-400 font-semibold mb-2">Demo Credentials:</p>
                 <div className="space-y-1 text-gray-300">
-                  <p><span className="text-yellow-400 font-semibold">Admin:</span> admin@hrms.com / admin123</p>
-                  <p><span className="text-yellow-400 font-semibold">Employee:</span> usman@cegs.com / usman@2017</p>
+                  <p><span className="text-yellow-400 font-semibold">Faculty:</span> admin@academy.com / admin123</p>
+                  <p><span className="text-yellow-400 font-semibold">Student:</span> student@academy.com / usman@2017</p>
                 </div>
               </div>
             </div>
@@ -176,10 +176,10 @@ function LoginForm() {
           {/* Footer */}
           <div className="mt-8 pt-6 border-t border-yellow-400/20 text-center">
             <p className="text-gray-500 text-xs">
-              © 2025 CEGS - Corporate Enterprise Growth Solutions
+              © 2026 Academic Portal - Knowledge Management System
             </p>
             <p className="text-yellow-400/60 text-xs mt-1">
-              Secure HR Management System
+              Secure LMS Portal
             </p>
           </div>
         </div>

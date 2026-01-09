@@ -7,8 +7,8 @@ import { AuthProvider } from '@/contexts/AuthContext';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'CEGS - HR Management System',
-  description: 'Corporate Enterprise Growth Solutions - Human Resources Portal',
+  title: 'Academic Portal - Learning Management System',
+  description: 'A comprehensive platform for modern education and knowledge management.',
 };
 
 export default function RootLayout({

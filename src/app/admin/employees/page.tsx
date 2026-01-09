@@ -14,7 +14,7 @@ export default function EmployeesPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
-  
+
   // FIXED: Added phone field to formData
   const [formData, setFormData] = useState({
     name: '',
@@ -31,7 +31,7 @@ export default function EmployeesPage() {
   useEffect(() => {
     const verifyAndLoadData = async () => {
       const isValidAdmin = await auth.requireAdminSession();
-      
+
       if (!isValidAdmin) {
         router.push('/login?type=admin');
         return;
@@ -47,7 +47,7 @@ export default function EmployeesPage() {
     try {
       setLoading(true);
       const token = auth.getToken();
-      
+
       const response = await fetch('/api/employees', {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -56,7 +56,7 @@ export default function EmployeesPage() {
       });
 
       const data = await response.json();
-      
+
       if (data.success) {
         setEmployees(data.data);
       } else {
@@ -78,9 +78,9 @@ export default function EmployeesPage() {
     try {
       const token = auth.getToken();
       const generatedId = editingEmployee?.employeeId || editingEmployee?.id || `EMP${Date.now()}`;
-      
+
       console.log('Submitting with ID:', generatedId);
-      
+
       const employeeData = {
         id: generatedId,
         employeeId: generatedId,
@@ -95,10 +95,10 @@ export default function EmployeesPage() {
         joinDate: formData.joinDate  // FIXED: Changed from joiningDate to joinDate
       };
 
-      const url = editingEmployee 
+      const url = editingEmployee
         ? `/api/employees/${generatedId}`
         : '/api/employees';
-      
+
       const method = editingEmployee ? 'PUT' : 'POST';
 
       console.log('Request URL:', url);
@@ -205,7 +205,7 @@ export default function EmployeesPage() {
     const csvContent = [
       ['Name', 'Email', 'Username', 'Phone', 'Department', 'Position', 'Salary', 'Join Date'],
       ...employees.map(emp => [
-        emp.name, emp.email, emp.username, emp.phone || 'N/A', emp.department, 
+        emp.name, emp.email, emp.username, emp.phone || 'N/A', emp.department,
         emp.position, emp.salary.toString(), emp.joiningDate
       ])
     ].map(row => row.join(',')).join('\n');
@@ -268,7 +268,7 @@ export default function EmployeesPage() {
                 </div>
               </div>
             </div>
-            
+
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={exportToPDF}
@@ -322,47 +322,47 @@ export default function EmployeesPage() {
                     <span className="text-2xl">✕</span>
                   </button>
                 </div>
-                
+
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-yellow-400 mb-3">👤 Full Name</label>
                     <input
                       type="text"
                       value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full px-4 py-3 bg-gray-800/50 border border-yellow-400/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400/50 transition-all duration-300"
                       placeholder="Enter full name"
                       required
                       disabled={submitting}
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-semibold text-yellow-400 mb-3">📧 Email Address</label>
                     <input
                       type="email"
                       value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full px-4 py-3 bg-gray-800/50 border border-yellow-400/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400/50 transition-all duration-300"
                       placeholder="employee@company.com"
                       required
                       disabled={submitting}
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-semibold text-yellow-400 mb-3">🆔 Username</label>
                     <input
                       type="text"
                       value={formData.username}
-                      onChange={(e) => setFormData({...formData, username: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                       className="w-full px-4 py-3 bg-gray-800/50 border border-yellow-400/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400/50 transition-all duration-300"
                       placeholder="Enter username"
                       required
                       disabled={submitting || editingEmployee !== null}
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-semibold text-yellow-400 mb-3">
                       🔒 Password {editingEmployee && '(leave blank to keep current)'}
@@ -370,79 +370,79 @@ export default function EmployeesPage() {
                     <input
                       type="password"
                       value={formData.password}
-                      onChange={(e) => setFormData({...formData, password: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                       className="w-full px-4 py-3 bg-gray-800/50 border border-yellow-400/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400/50 transition-all duration-300"
                       placeholder="Enter secure password"
                       required={!editingEmployee}
                       disabled={submitting}
                     />
                   </div>
-                  
+
                   {/* FIXED: Added phone field to the form */}
                   <div>
                     <label className="block text-sm font-semibold text-yellow-400 mb-3">📱 Phone Number</label>
                     <input
                       type="tel"
                       value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full px-4 py-3 bg-gray-800/50 border border-yellow-400/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400/50 transition-all duration-300"
                       placeholder="+91 98765 43210"
                       required
                       disabled={submitting}
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-semibold text-yellow-400 mb-3">🏢 Department</label>
                     <input
                       type="text"
                       value={formData.department}
-                      onChange={(e) => setFormData({...formData, department: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, department: e.target.value })}
                       className="w-full px-4 py-3 bg-gray-800/50 border border-yellow-400/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400/50 transition-all duration-300"
                       placeholder="e.g., Engineering, Sales"
                       required
                       disabled={submitting}
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-semibold text-yellow-400 mb-3">💼 Position</label>
                     <input
                       type="text"
                       value={formData.position}
-                      onChange={(e) => setFormData({...formData, position: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, position: e.target.value })}
                       className="w-full px-4 py-3 bg-gray-800/50 border border-yellow-400/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400/50 transition-all duration-300"
                       placeholder="e.g., Senior Developer"
                       required
                       disabled={submitting}
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-semibold text-yellow-400 mb-3">💰 Annual Salary</label>
                     <input
                       type="number"
                       value={formData.salary}
-                      onChange={(e) => setFormData({...formData, salary: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
                       className="w-full px-4 py-3 bg-gray-800/50 border border-yellow-400/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400/50 transition-all duration-300"
                       placeholder="₹ 500000"
                       required
                       disabled={submitting}
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-semibold text-yellow-400 mb-3">📅 Join Date</label>
                     <input
                       type="date"
                       value={formData.joinDate}
-                      onChange={(e) => setFormData({...formData, joinDate: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, joinDate: e.target.value })}
                       className="w-full px-4 py-3 bg-gray-800/50 border border-yellow-400/30 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400/50 transition-all duration-300"
                       required
                       disabled={submitting}
                     />
                   </div>
-                  
+
                   <div className="md:col-span-2 flex gap-4 justify-end mt-6">
                     <button
                       type="button"
@@ -518,11 +518,10 @@ export default function EmployeesPage() {
                       </tr>
                     ) : (
                       employees.map((employee, index) => (
-                        <tr 
-                          key={employee.id} 
-                          className={`hover:bg-gradient-to-r hover:from-yellow-400/5 hover:to-amber-500/5 transition-all duration-300 ${
-                            index % 2 === 0 ? 'bg-gray-800/20' : 'bg-gray-900/20'
-                          }`}
+                        <tr
+                          key={employee.id}
+                          className={`hover:bg-gradient-to-r hover:from-yellow-400/5 hover:to-amber-500/5 transition-all duration-300 ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-gray-900/20'
+                            }`}
                         >
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
@@ -599,7 +598,7 @@ export default function EmployeesPage() {
                   <p className="text-2xl font-bold text-white">{employees.length}</p>
                 </div>
               </div>
-              
+
               <div className="bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90 backdrop-blur-xl p-6 rounded-2xl shadow-2xl border border-green-400/20 relative overflow-hidden">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400/5 to-green-500/5 blur-xl opacity-60" />
                 <div className="relative z-10 text-center">
@@ -610,7 +609,7 @@ export default function EmployeesPage() {
                   </p>
                 </div>
               </div>
-              
+
               <div className="bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90 backdrop-blur-xl p-6 rounded-2xl shadow-2xl border border-blue-400/20 relative overflow-hidden">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400/5 to-blue-500/5 blur-xl opacity-60" />
                 <div className="relative z-10 text-center">
@@ -621,7 +620,7 @@ export default function EmployeesPage() {
                   </p>
                 </div>
               </div>
-              
+
               <div className="bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90 backdrop-blur-xl p-6 rounded-2xl shadow-2xl border border-purple-400/20 relative overflow-hidden">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400/5 to-purple-500/5 blur-xl opacity-60" />
                 <div className="relative z-10 text-center">
@@ -638,10 +637,10 @@ export default function EmployeesPage() {
           {/* Footer */}
           <div className="text-center mt-8">
             <p className="text-gray-500 text-sm">
-              © 2025 CEGS - Corporate Enterprise Growth Solutions
+              © 2026 Academic Portal - Knowledge Management System
             </p>
             <p className="text-yellow-400/60 text-xs mt-1">
-              Employee Management System - Human Resources Portal
+              Knowledge Base & Instructor Portal
             </p>
           </div>
         </div>
