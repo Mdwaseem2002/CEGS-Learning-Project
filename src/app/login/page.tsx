@@ -101,7 +101,7 @@ function LoginForm() {
                 <p className="text-blue-400 font-semibold mb-2">Demo Credentials:</p>
                 <div className="space-y-1 text-gray-300">
                   <p><span className="text-yellow-400 font-semibold">Faculty:</span> admin@academy.com / admin123</p>
-                  <p><span className="text-yellow-400 font-semibold">Student:</span> student@academy.com / usman@2017</p>
+                  <p><span className="text-yellow-400 font-semibold">Student:</span> john.doe@academy.com / password123</p>
                 </div>
               </div>
             </div>

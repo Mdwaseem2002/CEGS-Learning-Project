@@ -132,8 +132,12 @@ export default function HomePage() {
                     </p>
                   </div>
                   <div className="bg-gradient-to-r from-gray-700/20 to-gray-800/20 p-4 rounded-xl border border-gray-600/20">
-                    <p className="text-gray-400 text-sm">
-                      Student enrollments are managed by faculty through the platform.
+                    <p className="text-gray-400 text-sm mb-2">
+                      <span className="text-white font-semibold">Student Access:</span>
+                    </p>
+                    <p className="text-gray-400 font-mono text-xs">
+                      Email: john.doe@academy.com<br />
+                      Password: password123
                     </p>
                   </div>
                 </div>

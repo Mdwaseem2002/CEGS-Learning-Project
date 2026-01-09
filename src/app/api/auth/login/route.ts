@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     const { username, password } = await request.json();
 
     // Check admin credentials
-    if (username === 'admin@academy.com' && password === '0786') {
+    if (username === 'admin@academy.com' && password === 'admin123') {
       const token = jwt.sign(
         { id: 'admin', username, role: 'admin' },
         JWT_SECRET,

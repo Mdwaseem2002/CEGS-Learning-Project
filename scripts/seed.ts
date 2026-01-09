@@ -38,39 +38,39 @@ async function seed() {
       {
         id: 'EMP001',
         name: 'John Doe',
-        email: 'john.doe@hrms.com',
+        email: 'john.doe@academy.com',
         phone: '+1234567890',
-        department: 'Engineering',
-        position: 'Software Engineer',
+        department: 'Science',
+        position: 'Senior Faculty',
         salary: 75000,
         joinDate: '2024-01-15',
-        username: 'john.doe',
+        username: 'john.doe@academy.com',
         password: await bcrypt.hash('password123', 10),
         status: 'active'
       },
       {
         id: 'EMP002',
         name: 'Jane Smith',
-        email: 'jane.smith@hrms.com',
+        email: 'jane.smith@academy.com',
         phone: '+1234567891',
-        department: 'HR',
-        position: 'HR Manager',
+        department: 'Arts',
+        position: 'Department Head',
         salary: 65000,
         joinDate: '2024-02-01',
-        username: 'jane.smith',
+        username: 'jane.smith@academy.com',
         password: await bcrypt.hash('password123', 10),
         status: 'active'
       },
       {
         id: 'EMP003',
         name: 'Mike Johnson',
-        email: 'mike.johnson@hrms.com',
+        email: 'mike.johnson@academy.com',
         phone: '+1234567892',
-        department: 'Sales',
-        position: 'Sales Executive',
+        department: 'History',
+        position: 'Lecturer',
         salary: 55000,
         joinDate: '2024-03-10',
-        username: 'mike.johnson',
+        username: 'mike.johnson@academy.com',
         password: await bcrypt.hash('password123', 10),
         status: 'active'
       }
@@ -79,9 +79,9 @@ async function seed() {
     await Employee.insertMany(sampleEmployees);
     console.log('✅ Sample employees created');
     console.log('\n📝 Login Credentials:');
-    console.log('Admin: admin@hrms.com / admin123');
-    console.log('Employee: john.doe / password123');
-    console.log('Employee: jane.smith / password123');
+    console.log('Faculty: admin@academy.com / admin123');
+    console.log('Student: john.doe@academy.com / password123');
+    console.log('Student: jane.smith@academy.com / password123');
     console.log('Employee: mike.johnson / password123');
 
     await mongoose.connection.close();
