@@ -53,7 +53,7 @@ export default function EmployeeLayout({ children }: EmployeeLayoutProps) {
               </div>
               <div>
                 <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600">
-                  Employee Portal
+                  User Portal
                 </h1>
                 {employeeName && (
                   <p className="text-yellow-400/80 font-medium">
@@ -89,7 +89,7 @@ export default function EmployeeLayout({ children }: EmployeeLayoutProps) {
               </div>
               <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 group-hover:w-full transition-all duration-300 rounded-t-full" />
             </button>
-            
+
             <button
               onClick={() => navigateTo('/employee/attendance')}
               className="group relative py-4 px-6 text-gray-300 hover:text-yellow-400 font-semibold transition-all duration-300 ease-in-out"
@@ -100,7 +100,7 @@ export default function EmployeeLayout({ children }: EmployeeLayoutProps) {
               </div>
               <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 group-hover:w-full transition-all duration-300 rounded-t-full" />
             </button>
-            
+
             <button
               onClick={() => navigateTo('/employee/leave')}
               className="group relative py-4 px-6 text-gray-300 hover:text-yellow-400 font-semibold transition-all duration-300 ease-in-out"
@@ -108,6 +108,17 @@ export default function EmployeeLayout({ children }: EmployeeLayoutProps) {
               <div className="flex items-center gap-3">
                 <span className="text-xl group-hover:scale-110 transition-transform duration-300">📝</span>
                 <span>Leave Request</span>
+              </div>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 group-hover:w-full transition-all duration-300 rounded-t-full" />
+            </button>
+
+            <button
+              onClick={() => navigateTo('/employee/courses')}
+              className="group relative py-4 px-6 text-gray-300 hover:text-yellow-400 font-semibold transition-all duration-300 ease-in-out"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xl group-hover:scale-110 transition-transform duration-300">📚</span>
+                <span>Courses</span>
               </div>
               <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 group-hover:w-full transition-all duration-300 rounded-t-full" />
             </button>
@@ -120,7 +131,7 @@ export default function EmployeeLayout({ children }: EmployeeLayoutProps) {
         <div className="bg-gradient-to-br from-gray-900/30 via-black/50 to-gray-900/30 backdrop-blur-sm rounded-3xl shadow-2xl border border-yellow-400/10 min-h-[calc(100vh-200px)] relative overflow-hidden">
           {/* Premium Border Glow */}
           <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-yellow-400/10 via-amber-500/10 to-yellow-400/10 blur-xl opacity-40" />
-          
+
           <div className="relative z-10 p-6">
             {children}
           </div>

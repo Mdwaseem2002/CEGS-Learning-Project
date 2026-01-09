@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <rect width="256" height="256" fill="#0db7ed"/>
+  <path d="M128 80c-30 0-50 10-50 20s20 20 50 20 50-10 50-20-20-20-50-20zm-60 60l10-20 50 30-50 30-10-20zm80-20l50-30 10 20-50 30-10-20zm-20 80c-30 0-50-10-50-20l50-30 50 30c0 10-20 20-50 20z" fill="white"/>
+  <text x="128" y="210" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle" font-weight="bold">DOCKER</text>
+</svg>

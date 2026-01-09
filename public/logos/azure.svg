@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <rect width="256" height="256" fill="#0078D4"/>
+  <path d="M80 100L128 70L176 100L176 160L128 190L80 160Z" fill="none" stroke="white" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M128 70L128 190M80 100L176 160M176 100L80 160" stroke="white" stroke-width="4"/>
+  <circle cx="128" cy="70" r="8" fill="white"/>
+  <circle cx="80" cy="100" r="8" fill="white"/>
+  <circle cx="176" cy="100" r="8" fill="white"/>
+  <circle cx="80" cy="160" r="8" fill="white"/>
+  <circle cx="176" cy="160" r="8" fill="white"/>
+  <circle cx="128" cy="190" r="8" fill="white"/>
+  <text x="128" y="230" font-family="Arial, sans-serif" font-size="28" fill="white" text-anchor="middle" font-weight="bold">AZURE</text>
+</svg>

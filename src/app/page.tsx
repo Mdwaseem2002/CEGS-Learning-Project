@@ -33,7 +33,7 @@ export default function HomePage() {
                   CEGS
                 </h1>
                 <p className="text-yellow-400/80 text-sm font-medium">
-                  Corporate Enterprise Growth Solutions
+                  Career Expert Global solutions
                 </p>
               </div>
             </div>
@@ -49,14 +49,14 @@ export default function HomePage() {
                   👑 Admin Portal
                 </span>
               </a>
-              
+
               <a
                 href="/login?type=employee"
                 className="group bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white font-semibold px-6 py-3 rounded-xl shadow-xl border-2 border-yellow-400/30 hover:border-yellow-400/60 transition-all duration-300 ease-in-out transform hover:scale-105 hover:-translate-y-1 relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center gap-2">
-                  💼 Employee Access
+                  💼 User Access
                 </span>
               </a>
             </div>
@@ -67,7 +67,7 @@ export default function HomePage() {
       {/* Main Content */}
       <div className="relative z-10 flex items-center justify-center min-h-[calc(100vh-80px)] px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl w-full items-center">
-          
+
           {/* Left Column - Main Content */}
           <div className="space-y-8">
             <div className="text-left">
@@ -127,7 +127,7 @@ export default function HomePage() {
                       <span className="text-yellow-400 font-semibold">Administrator Access:</span>
                     </p>
                     <p className="text-white font-mono text-sm">
-                      Email: admin@cegs.com<br/>
+                      Email: admin@cegs.com<br />
                       Password: admin123
                     </p>
                   </div>
